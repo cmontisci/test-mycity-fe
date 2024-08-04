@@ -7,7 +7,6 @@
 
       <v-app-bar-title>My City - Test</v-app-bar-title>
       <template v-slot:append>
-<!--        <InvertColors />-->
         <User />
         <Logout />
       </template>
@@ -20,7 +19,6 @@
 </template>
 
 <script setup>
-  import InvertColors from "@/components/InvertColors.vue";
   import User from "@/components/User.vue";
   import Logout from "@/components/Logout.vue";
 </script>
