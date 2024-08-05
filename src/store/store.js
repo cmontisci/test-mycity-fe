@@ -1,20 +1,25 @@
 import { createStore } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 const store = createStore({
   state: {
     token: null,
     user: null,
+    loggedIn: false
   },
   mutations: {
     setToken(state, token) {
       state.token = token;
+      state.loggedIn = true;
     },
     setUser(state, user) {
       state.user = user;
+      state.loggedIn = true;
     },
     clearAuthData(state) {
       state.token = null;
       state.user = null;
+      state.loggedIn = false;
     },
   },
   actions: {
@@ -32,7 +37,7 @@ const store = createStore({
   },
   getters: {
     isLoggedIn(state) {
-      return !!state.token;
+      return state.loggedIn;
     },
     getToken(state) {
       return state.token;
@@ -44,6 +49,11 @@ const store = createStore({
       return state.user.role_id === 1;
     },
   },
+  plugins: [
+    createPersistedState({
+      paths: ['user', 'token', 'loggedIn'] // Persist only specific paths in the state
+    })
+  ]
 });
 
 export default store;
